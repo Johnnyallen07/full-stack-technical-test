@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useEvents } from '../../hooks/useEvents';
+import {useEvents} from "@/hooks/useEvents";
 
 const EVENTS_PER_PAGE = 9;
 
