@@ -2,9 +2,8 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-const API_KEY = 'tlGUZ1qg14U22eY10bm73JYK7wd61kUeQBWFM570';
-// You need to replace this with your actual API Gateway ID
-const API_ID = 'x15zoj9on9';
+const API_KEY = process.env.API_KEY;
+const API_ID = process.env.API_ID;
 const API_URL = `https://${API_ID}.execute-api.us-east-1.amazonaws.com/prod/events`;
 
 interface Event {
