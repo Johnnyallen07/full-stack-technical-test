@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useEvents } from "@/hooks/useEvents";
+import { Event } from '@/types';
 
 const EVENTS_PER_PAGE = 9;
 
@@ -34,11 +35,11 @@ export default function EventsPage() {
 
   const events = data?.events || [];
 
-  const filteredEvents = events.filter((event) => {
+  const filteredEvents = events.filter((event: Event) => {
     const eventTitle = event.title || '';
     const eventDescription = event.description || '';
     const matchesSearch = eventTitle.toLowerCase().includes(searchTerm.toLowerCase()) || eventDescription.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = category === 'all' || (event as any).category?.id === category;
+    const matchesCategory = category === 'all' || event.category.id === category;
     return matchesSearch && matchesCategory;
   });
 
@@ -103,7 +104,7 @@ export default function EventsPage() {
         ) : paginatedEvents.length > 0 ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {paginatedEvents.map((event: any) => (
+              {paginatedEvents.map((event: Event) => (
                 <div key={event.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
                   <Link href={`/events/${event.id}`}>
                     <div className="relative">
