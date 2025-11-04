@@ -3,11 +3,14 @@
 
 import { useEvent } from '@/hooks/useEvent';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
+import { RegistrationDialog } from '@/components/RegistrationDialog';
 
 export default function EventPage() {
   const params = useParams();
   const { id } = params;
   const { data: event, error, isLoading } = useEvent(id as string);
+  const [isRegistering, setIsRegistering] = useState(false);
 
   if (isLoading) return (
     <div className="container mx-auto px-4 py-8 animate-pulse">
@@ -33,6 +36,7 @@ export default function EventPage() {
   );
 
   const eventDate = new Date(event.date);
+  const isFull = event.capacity.registered >= event.capacity.max;
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -69,14 +73,19 @@ export default function EventPage() {
               </div>
 
               <div className="mt-10">
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105">
-                  Register for this Event
+                <button 
+                  onClick={() => setIsRegistering(true)} 
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  disabled={isFull}
+                >
+                  {isFull ? 'Event Full' : 'Register for this Event'}
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {isRegistering && <RegistrationDialog event={event} onClose={() => setIsRegistering(false)} />}
     </div>
   );
 }

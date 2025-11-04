@@ -34,3 +34,23 @@ export interface EventsResponse {
     total: number;
     lastKey?: string;
 }
+
+export interface RegistrationRequest {
+    attendeeEmail: string;
+    attendeeName: string;
+    groupSize?: number;
+}
+
+export interface Attendee {
+    email: string;
+    name: string;
+    groupSize: number;
+    registeredAt: string;
+}
+
+export interface RegistrationResponse {
+    success: boolean;
+    registrationId: string;
+    event: Event;
+    attendee: Attendee;
+}
