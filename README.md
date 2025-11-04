@@ -9,3 +9,5 @@
   - components (reusable components)
   - hooks (api + hooks)
   - types.ts (event type)
+
+- deployed url: https://full-stack-test-johnny-6e8mteoi6-johnnyallen07s-projects.vercel.app/events.
